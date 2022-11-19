@@ -9,9 +9,6 @@ import exceptions.TreeException;
 
 public class BSTree <E extends Comparable <? super E>> implements BSTreeADT <E> {
 
-    /**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private BSTreeNode <E> root;
     private int size;
@@ -206,7 +203,7 @@ public class BSTree <E extends Comparable <? super E>> implements BSTreeADT <E> 
      * @return an iterator with the elements in the natural order
      */
     @Override
-    public Iterator inorderIterator() {
+    public Iterator<E> inorderIterator() {
         Stack<BSTreeNode<E>> stack = new Stack<>();
         Queue<BSTreeNode<E>> queue = new LinkedList<BSTreeNode<E>>();
         BSTreeNode<E> current = root;

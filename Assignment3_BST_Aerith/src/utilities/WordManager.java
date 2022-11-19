@@ -3,7 +3,11 @@ package utilities;
 import java.io.Serializable;
 
 public class WordManager implements Comparable<WordManager>, Serializable {
-    private int linePosition;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private int linePosition;
     private String fileName;
     private String word;
 

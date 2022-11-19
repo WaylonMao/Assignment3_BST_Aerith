@@ -4,7 +4,12 @@ import java.io.Serializable;
 import java.util.LinkedList;
 
 public class BSTreeNode<E> implements Serializable {
-    private  E element;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private  E element;
 
     private BSTreeNode<E> left, right;
 

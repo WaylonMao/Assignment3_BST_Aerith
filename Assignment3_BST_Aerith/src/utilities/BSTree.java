@@ -128,9 +128,10 @@ public class BSTree <E extends Comparable <? super E>> implements BSTreeADT <E> 
      */
     @Override
     public BSTreeNode<E> search(E entry) throws TreeException {
-        if(root == null){
-            throw new TreeException("The tree is empty.");
-        }else{
+//        if(root == null){
+//            throw new TreeException("The tree is empty.");
+//        }else{
+
             BSTreeNode<E> temp = root;
             while(temp != null){
                 if(temp.getElement().compareTo(entry) == 0){
@@ -141,7 +142,7 @@ public class BSTree <E extends Comparable <? super E>> implements BSTreeADT <E> 
                     temp = temp.getRight();
                 }
             }
-        }
+//        }
         return null;
     }
 

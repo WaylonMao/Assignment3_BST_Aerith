@@ -1,49 +1,48 @@
 package utilities;
 
 import java.io.Serializable;
-import java.util.LinkedList;
 
-public class BSTreeNode<E> implements Serializable {
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+public class BSTreeNode<E extends Comparable<? super E>> implements Serializable {
 
-	private  E element;
+    private static final long serialVersionUID = 1L;
+
+    private E element;
 
     private BSTreeNode<E> left, right;
 
-    LinkedList<E> list = new LinkedList<E>();
-
-    public void addRecord(E element) {
-        this.list.add( element);
-    }
-
-    public int getSize() {
-        return list.size();
-    }
-
-    /**
-     * Get information about the element stored in this node.
-     *
-     */
-    public LinkedList<E> getList() {
-        return list;
-    }
-
-
-    public BSTreeNode(){
+    public BSTreeNode() {
         this(null);
     }
 
-    public BSTreeNode(E element){
-       this(element, null, null);
+    public BSTreeNode(E element) {
+        this(element, null, null);
     }
 
     public BSTreeNode(E element, BSTreeNode<E> left, BSTreeNode<E> right) {
         this.element = element;
         this.left = left;
         this.right = right;
+    }
+
+    public boolean add(BSTreeNode<E> newNode) {
+        if (newNode == null) {
+            return false;
+        }
+
+        if (newNode.getElement().compareTo(this.element) < 0) {
+            if (left == null) {
+                left = newNode;
+            } else {
+                left.add(newNode);
+            }
+        } else if (newNode.getElement().compareTo(this.element) > 0) {
+            if (right == null) {
+                right = newNode;
+            } else {
+                right.add(newNode);
+            }
+        }
+        return true;
     }
 
     public E getElement() {
@@ -70,21 +69,16 @@ public class BSTreeNode<E> implements Serializable {
         this.right = right;
     }
 
-
     public boolean hasLeft() {
         return left != null;
     }
+
     public boolean hasRight() {
         return right != null;
     }
 
     public boolean isLeaf() {
         return (left == null) && (right == null);
-    }
-
-    public int getNumberNodes() {
-       int numberNodes = 0;
-       return numberNodes;
     }
 
     public int getHeight() {
@@ -98,11 +92,4 @@ public class BSTreeNode<E> implements Serializable {
         }
         return 1 + Math.max(leftHeight, rightHeight);
     }
-
-    public int getHeight(BSTreeNode<E> node) {
-        int height = 0;
-        return height;
-    }
-
-
 }

@@ -7,20 +7,18 @@ import java.util.Stack;
 
 import exceptions.TreeException;
 
-public class BSTree <E extends Comparable <? super E>> implements BSTreeADT <E> {
+public class BSTree<E extends Comparable<? super E>> implements BSTreeADT<E> {
 
-	private static final long serialVersionUID = 1L;
-	private BSTreeNode <E> root;
+    private static final long serialVersionUID = 1L;
+    private BSTreeNode<E> root;
     private int size;
-    private int height;
 
 
     /**
-     *  Default constructor for the BSTree class.  Creates an empty tree.
+     * Default constructor for the BSTree class.  Creates an empty tree.
      */
     public BSTree() {
         this.size = 0;
-        this.height = 0;
     }
 
     /**
@@ -34,9 +32,7 @@ public class BSTree <E extends Comparable <? super E>> implements BSTreeADT <E> 
         if (root == null) {
             throw new TreeException("The root is empty.");
         }
-
         return root;
-
     }
 
     /**
@@ -47,9 +43,9 @@ public class BSTree <E extends Comparable <? super E>> implements BSTreeADT <E> 
      */
     @Override
     public int getHeight() {
-        if(root == null) {
+        if (root == null) {
             return 0;
-        }else{
+        } else {
             return root.getHeight();
         }
     }
@@ -72,9 +68,9 @@ public class BSTree <E extends Comparable <? super E>> implements BSTreeADT <E> 
      */
     @Override
     public boolean isEmpty() {
-        if(size == 0){
+        if (size == 0) {
             return true;
-        }else {
+        } else {
             return false;
         }
     }
@@ -86,8 +82,6 @@ public class BSTree <E extends Comparable <? super E>> implements BSTreeADT <E> 
     public void clear() {
         root = null;
         size = 0;
-        height = 0;
-
     }
 
     /**
@@ -102,16 +96,16 @@ public class BSTree <E extends Comparable <? super E>> implements BSTreeADT <E> 
      */
     @Override
     public boolean contains(E entry) throws TreeException {
-        if(root == null){
+        if (root == null) {
             throw new TreeException("The tree is empty.");
-        }else{
+        } else {
             BSTreeNode<E> temp = root;
-            while(temp != null){
-                if(temp.getElement().compareTo(entry) == 0){
+            while (temp != null) {
+                if (temp.getElement().compareTo(entry) == 0) {
                     return true;
-                }else if(temp.getElement().compareTo(entry) > 0){
+                } else if (temp.getElement().compareTo(entry) > 0) {
                     temp = temp.getLeft();
-                }else{
+                } else {
                     temp = temp.getRight();
                 }
             }
@@ -128,21 +122,20 @@ public class BSTree <E extends Comparable <? super E>> implements BSTreeADT <E> 
      */
     @Override
     public BSTreeNode<E> search(E entry) throws TreeException {
-//        if(root == null){
-//            throw new TreeException("The tree is empty.");
-//        }else{
-
+        if (root == null) {
+            throw new TreeException("The tree is empty.");
+        } else {
             BSTreeNode<E> temp = root;
-            while(temp != null){
-                if(temp.getElement().compareTo(entry) == 0){
+            while (temp != null) {
+                if (temp.getElement().compareTo(entry) == 0) {
                     return temp;
-                }else if(temp.getElement().compareTo(entry) > 0){
+                } else if (temp.getElement().compareTo(entry) > 0) {
                     temp = temp.getLeft();
-                }else{
+                } else {
                     temp = temp.getRight();
                 }
             }
-//        }
+        }
         return null;
     }
 
@@ -156,18 +149,17 @@ public class BSTree <E extends Comparable <? super E>> implements BSTreeADT <E> 
      */
     @Override
     public boolean add(E newEntry) throws NullPointerException {
-        BSTreeNode<E> newNode = new BSTreeNode<>(newEntry);
-        newNode.addRecord(newEntry);
         if (newEntry == null) {
-            throw new NullPointerException("The element being added is null.");
+            throw new NullPointerException();
         } else {
+            BSTreeNode<E> newNode = new BSTreeNode<E>(newEntry, null, null);
             if (root == null) {
                 root = newNode;
                 size++;
-                height++;
                 return true;
             } else {
-                return addHelper(newEntry, root);
+                size++;
+                return root.add(newNode);
             }
         }
 
@@ -193,7 +185,6 @@ public class BSTree <E extends Comparable <? super E>> implements BSTreeADT <E> 
         } else {
             return false;
         }
-
     }
 
 
@@ -208,8 +199,8 @@ public class BSTree <E extends Comparable <? super E>> implements BSTreeADT <E> 
         Stack<BSTreeNode<E>> stack = new Stack<>();
         Queue<BSTreeNode<E>> queue = new LinkedList<BSTreeNode<E>>();
         BSTreeNode<E> current = root;
-        while(current != null || !stack.isEmpty()){
-            while(current != null){
+        while (current != null || !stack.isEmpty()) {
+            while (current != null) {
                 stack.push(current);
                 current = current.getLeft();
             }
@@ -217,6 +208,7 @@ public class BSTree <E extends Comparable <? super E>> implements BSTreeADT <E> 
             current = stack.pop();
             current = current.getRight();
         }
+
         Iterator<E> it = new Iterator<E>() {
             @Override
             public boolean hasNext() {
@@ -225,14 +217,12 @@ public class BSTree <E extends Comparable <? super E>> implements BSTreeADT <E> 
 
             @Override
             public E next() throws NoSuchElementException {
-                if(!hasNext()){
+                if (!hasNext()) {
                     throw new NoSuchElementException("There are no more elements in the queue.");
-
                 }
                 return queue.remove().getElement();
             }
         };
-
         return it;
     }
 
@@ -244,18 +234,18 @@ public class BSTree <E extends Comparable <? super E>> implements BSTreeADT <E> 
      */
     @Override
     public Iterator preorderIterator() {
-      if(root == null) return  null;
+        if (root == null) return null;
         Stack<BSTreeNode<E>> stack = new Stack<>();
         Queue<BSTreeNode<E>> queue = new LinkedList<BSTreeNode<E>>();
         BSTreeNode<E> current = root;
         stack.push(current);
-        while(!stack.isEmpty()){
+        while (!stack.isEmpty()) {
             current = stack.pop();
             queue.add(current);
-            if(current.getRight() != null){
+            if (current.getRight() != null) {
                 stack.push(current.getRight());
             }
-            if(current.getLeft() != null){
+            if (current.getLeft() != null) {
                 stack.push(current.getLeft());
             }
         }
@@ -267,16 +257,15 @@ public class BSTree <E extends Comparable <? super E>> implements BSTreeADT <E> 
 
             @Override
             public E next() throws NoSuchElementException {
-                if(!hasNext()){
+                if (!hasNext()) {
                     throw new NoSuchElementException("There are no more elements in the queue.");
 
                 }
                 return queue.remove().getElement();
             }
         };
-
         return it;
-  }
+    }
 
     /**
      * Generates a post-order iteration over the contents of the tree. Elements
@@ -287,11 +276,11 @@ public class BSTree <E extends Comparable <? super E>> implements BSTreeADT <E> 
     @Override
     public Iterator postorderIterator() {
         // implement pre-order traversal
-        if(root == null) return  null;
-        Stack<BSTreeNode<E>> stack  = new Stack<>();
-        Stack<BSTreeNode<E>> result  = new Stack<>();
+        if (root == null) return null;
+        Stack<BSTreeNode<E>> stack = new Stack<>();
+        Stack<BSTreeNode<E>> result = new Stack<>();
         stack.push(root);
-        while (!stack.isEmpty()){
+        while (!stack.isEmpty()) {
             BSTreeNode<E> current = stack.peek();
             stack.pop();
             result.push(current);
@@ -302,6 +291,7 @@ public class BSTree <E extends Comparable <? super E>> implements BSTreeADT <E> 
                 stack.push(current.getRight());
             }
         }
+
         Iterator<E> it = new Iterator<E>() {
             @Override
             public boolean hasNext() {
@@ -310,15 +300,13 @@ public class BSTree <E extends Comparable <? super E>> implements BSTreeADT <E> 
 
             @Override
             public E next() throws NoSuchElementException {
-                if(!hasNext()){
+                if (!hasNext()) {
                     throw new NoSuchElementException("There are no more elements in the queue.");
 
                 }
                 return result.pop().getElement();
             }
         };
-
-
         return it;
     }
 }

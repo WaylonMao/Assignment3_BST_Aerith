@@ -18,6 +18,7 @@ public class BSTree<E extends Comparable<? super E>> implements BSTreeADT<E> {
      * Default constructor for the BSTree class.  Creates an empty tree.
      */
     public BSTree() {
+        root = null;
         this.size = 0;
     }
 

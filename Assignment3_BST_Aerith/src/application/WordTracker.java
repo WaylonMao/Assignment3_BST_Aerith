@@ -10,15 +10,29 @@ import java.sql.SQLOutput;
 import java.util.*;
 
 /**
- * Class description: test arguments: "res/textfile.txt" -po
+ * Class description: This class is the main class of the program. It is used to
+ * read the input file and store the words in a binary search tree.
  *
- * @author
+ * @author Weilong Mao, Hoa Le, Chris Wang, Hu Peng
  */
 
 public class WordTracker {
+
+    /**
+     * The name of the output file
+     */
     private static String fileOutputName;
+    /**
+     * The name of the input file
+     */
     private static String fileInputName;
+    /**
+     * User input
+     */
     private static String userOption;
+    /**
+     * The binary search tree that stores the words
+     */
     static final File REPOSITORY_FILE = new File("ser/repository.ser");
 
     public static void main(String[] args) {
@@ -120,6 +134,11 @@ public class WordTracker {
             throw new RuntimeException(e);
         }
     }
+
+    /**
+     * This method is used to parse the arguments
+     * @param args the arguments input by the user
+     */
 
     private void parseArgs(String[] args) {
         if (args.length == 0 || args.length > 3 || args.length < 2)

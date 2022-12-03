@@ -2,6 +2,13 @@ package utilities;
 
 import java.io.Serializable;
 
+/**
+ * Class Description: This class is BSTree Node uses to store the data in the
+ * tree.
+ * @author Weilong Mao, Hoa Le, Chris Wang, Hu Peng
+ * @param <E> the type of the data stored in the node
+ */
+
 public class BSTreeNode<E extends Comparable<? super E>> implements Serializable {
 
 	private static final long serialVersionUID = 1L;

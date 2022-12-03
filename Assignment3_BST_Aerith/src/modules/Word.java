@@ -5,11 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Class description:
+ * Class description: This class represents a word in the tree.
  *
- * @author Weilong Mao
+ * @author Weilong Mao, Hoa Le, Chris Wang, Hu Peng
  */
 public class Word implements Comparable<Word>, Serializable {
+
     private String word;
     private List<Integer> lineNumbers;
     private List<String> fileNames;

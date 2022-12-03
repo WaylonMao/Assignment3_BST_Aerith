@@ -1,10 +1,10 @@
 package exceptions;
 
 public class TreeException extends Exception {
-       /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+    /**
+     * Default constructor for the TreeException class.
+     */
+    private static final long serialVersionUID = 1L;
 	public TreeException() {
             super("Tree Exception");
         }

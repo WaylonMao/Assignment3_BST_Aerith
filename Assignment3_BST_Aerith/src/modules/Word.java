@@ -12,55 +12,58 @@ import java.util.List;
 public class Word implements Comparable<Word>, Serializable {
 
     private String word;
-    private List<Integer> lineNumbers;
-    private List<String> fileNames;
+    private List<WordLocation> wordLocations;
     private int count;
 
-    public Word(String word, int lineNumber, String fileName) {
+    public Word(String word) {
         this.word = word;
-        this.lineNumbers = new ArrayList<>();
-        this.fileNames = new ArrayList<>();
-        this.lineNumbers.add(lineNumber);
-        this.fileNames.add(fileName);
-        this.count = 1;
+        this.wordLocations = new ArrayList<>();
+        count = 0;
     }
 
     public void addCount(int lineNumber, String fileName) {
-        this.lineNumbers.add(lineNumber);
-        this.fileNames.add(fileName);
+        if(wordLocations.size() == 0) {
+            WordLocation wl = new WordLocation(fileName);
+            wl.getLineNumbers().add(lineNumber);
+            wordLocations.add(wl);
+        } else {
+            for(WordLocation wl : wordLocations) {
+                if(wl.getFileName().equals(fileName)) {
+                    if(!wl.getLineNumbers().contains(lineNumber)) {
+                        wl.getLineNumbers().add(lineNumber);
+                        count++;
+                    }
+                    return;
+                }
+            }
+            WordLocation wl = new WordLocation(fileName);
+            wl.getLineNumbers().add(lineNumber);
+            wordLocations.add(wl);
+        }
         count++;
     }
-
 
     public String getWord() {
         return word;
     }
 
-    public List<Integer> getLineNumbers() {
-        return lineNumbers;
+    public void setWord(String word) {
+        this.word = word;
     }
 
-    public List<String> getFileNames() {
-        return fileNames;
+    public List<WordLocation> getWordLocations() {
+        return wordLocations;
+    }
+
+    public void setWordLocations(List<WordLocation> wordLocations) {
+        this.wordLocations = wordLocations;
     }
 
     public int getCount() {
         return count;
     }
 
-    private void setWord(String word) {
-        this.word = word;
-    }
-
-    private void setLineNumbers(List<Integer> lineNumbers) {
-        this.lineNumbers = lineNumbers;
-    }
-
-    private void setFileNames(List<String> fileNames) {
-        this.fileNames = fileNames;
-    }
-
-    private void setCount(int count) {
+    public void setCount(int count) {
         this.count = count;
     }
 

@@ -15,12 +15,21 @@ public class Word implements Comparable<Word>, Serializable {
     private List<WordLocation> wordLocations;
     private int count;
 
+    /**
+     * Description: This constructor creates a new word object.
+     * @param word the word to be created
+     */
     public Word(String word) {
         this.word = word;
         this.wordLocations = new ArrayList<>();
         count = 0;
     }
 
+    /**
+     * Description: This method adds a new word location to the word.
+     * @param lineNumber the line number of the word
+     * @param fileName  the file name the word is in
+     */
     public void addCount(int lineNumber, String fileName) {
         if(wordLocations.size() == 0) {
             WordLocation wl = new WordLocation(fileName);
@@ -42,7 +51,10 @@ public class Word implements Comparable<Word>, Serializable {
         }
         count++;
     }
-
+    /**
+     * Description: This method returns the word.
+     * @return the word of the object
+     */
     public String getWord() {
         return word;
     }

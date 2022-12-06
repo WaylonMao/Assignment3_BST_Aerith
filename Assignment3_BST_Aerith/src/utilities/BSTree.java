@@ -166,6 +166,12 @@ public class BSTree<E extends Comparable<? super E>> implements BSTreeADT<E> {
 
     }
 
+    /**
+     * The helper method for the remove method.  This method will find the
+     * @param newEntry the element being added to the tree
+     * @param root the root of the tree
+     * @return  the node that was removed
+     */
     private boolean addHelper(E newEntry, BSTreeNode<E> root) {
         if (newEntry.compareTo(root.getElement()) < 0) {
             if (root.getLeft() == null) {

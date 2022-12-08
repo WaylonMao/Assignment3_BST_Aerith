@@ -16,7 +16,6 @@ public class WordLocation implements Serializable {
     /**
      * The serial version UID
      */
-
     private static final long serialVersionUID = 1L;
 
     /**
@@ -30,9 +29,9 @@ public class WordLocation implements Serializable {
 
     /**
      * Constructor of the WordLocation class.
+     *
      * @param fileName the name of the file
      */
-
     public WordLocation(String fileName) {
         this.fileName = fileName;
         this.lineNumbers = new ArrayList<>();
@@ -40,36 +39,36 @@ public class WordLocation implements Serializable {
 
     /**
      * Get the file name.
+     *
      * @return the file name
      */
-
     public String getFileName() {
         return fileName;
     }
 
     /**
      * Get the line number.
+     *
      * @param fileName the name of the file
      */
-
     public void setFileName(String fileName) {
         this.fileName = fileName;
     }
 
     /**
      * Get the line number.
+     *
      * @return the line number
      */
-
     public List<Integer> getLineNumbers() {
         return lineNumbers;
     }
 
     /**
      * Set the line number.
+     *
      * @param lineNumbers the line number
      */
-
     public void setLineNumbers(List<Integer> lineNumbers) {
         this.lineNumbers = lineNumbers;
     }

@@ -13,7 +13,6 @@ public class BSTree<E extends Comparable<? super E>> implements BSTreeADT<E> {
     private BSTreeNode<E> root;
     private int size;
 
-
     /**
      * Default constructor for the BSTree class.  Creates an empty tree.
      */
@@ -163,14 +162,14 @@ public class BSTree<E extends Comparable<? super E>> implements BSTreeADT<E> {
                 return root.add(newNode);
             }
         }
-
     }
 
     /**
      * The helper method for the remove method.  This method will find the
+     *
      * @param newEntry the element being added to the tree
-     * @param root the root of the tree
-     * @return  the node that was removed
+     * @param root     the root of the tree
+     * @return the node that was removed
      */
     private boolean addHelper(E newEntry, BSTreeNode<E> root) {
         if (newEntry.compareTo(root.getElement()) < 0) {

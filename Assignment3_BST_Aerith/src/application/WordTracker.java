@@ -143,7 +143,6 @@ public class WordTracker {
      *
      * @param args the arguments input by the user
      */
-
     private boolean parseArgs(String[] args) {
         if (args.length == 0 || args.length > 4 || args.length < 2) {
             System.out.println("There were errors on the arguments");

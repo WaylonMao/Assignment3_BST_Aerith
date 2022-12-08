@@ -84,7 +84,10 @@ public class WordTracker {
                     }
                 }
                 for (String word : line.split("\\s")) {
-                    Word addWord = new Word(word);
+                    if(word.equals("")){
+                        continue;
+                    }
+                    Word addWord = new Word(word.toLowerCase());
                     addWord.addCount(lineCount, fileInputName);
                     if (wordTree.isEmpty() || wordTree.search(addWord) == null) {
                         wordTree.add(addWord);
